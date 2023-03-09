@@ -1,9 +1,8 @@
 ---
 - hosts: 172.31.2.214
   become: yes
-  tasks:
-  - name: "Run {{item}}"
-    command: "{{item}}"
-    loop :
-      - sudo -i
-      - apt-get update
+  tasks: 
+  - name: Installing java
+    apt:
+      name: openjdk-11-jdk
+      state: present
