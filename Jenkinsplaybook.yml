@@ -15,7 +15,9 @@
       url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
       state: present
   - name: Configure Jenkins Repository
-    apt_repository: deb http://pkg.jenkins.io/debian-stable binary/
+    apt_repository:
+      repo: 'deb http://pkg.jenkins.io/debian-stable binary/'
+      state: present
   - name: Installing Jenkins
     apt:
       name: jenkins
