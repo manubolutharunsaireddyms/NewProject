@@ -4,7 +4,7 @@
   tasks: 
   - name: Installing java
     apt:
-      name: openjdk-8-jdk
+      name: openjdk-11-jdk
       state: present
   - name: Installing Maven
     apt:
@@ -36,7 +36,7 @@
     become: yes
   - name: Configure Docker Repository
     apt_repository:
-      repo: 'deb https://download.docker.com/linux/ubuntu focal stable'
+      repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable'
       state: present
     become: yes
   - name: Installing Docker
