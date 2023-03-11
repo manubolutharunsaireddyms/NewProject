@@ -46,4 +46,6 @@
       update-cache: true
   - name: Adding Jenkins user to Docker Group
     command: sudo usermod -aG docker jenkins
+  - name: Restart Jenkins
+    command: sudo systemctl restart jenkins
     
