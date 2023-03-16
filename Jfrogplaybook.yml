@@ -2,28 +2,20 @@
 - hosts: 172.31.3.28
   become: yes
   vars:
-    jfrog_version: 7.28.4
+    jfrog_version: "7.28.4"
   tasks:
   - name: Insttalling java
     yum:
       name: java-1.8.0-openjdk
       state: present
-  - name: Download and Install JFrog
-    unarchive:
-    src: https://bintray.com/jfrog/artifactory/download_file?file_path=jfrog-artifactory-{{ jfrog_version }}.zip
-    dest: /opt/
-    remote_src: yes
-    owner: jfrog
-    group: jfrog
-    mode: 0755
-    creates: /opt/jfrog-artifactory-{{ jfrog_version }}
-  - name: Configure JFrog
-    template:
-    src: jfrog.conf.j2
-    dest: /opt/jfrog-artifactory-{{ jfrog_version }}/tomcat/conf/Catalina/localhost/ROOT.xml
-    owner: jfrog
-    group: jfrog
-    mode: 0755
+  - name: Download JFrog Artifactory
+    get_url:
+      url: "https://bintray.com/jfrog/artifactory-rpms/rpm/{{ artifactory_version }}/el7/x86_64/jfrog-artifactory-{{ artifactory_version }}-1.el7.noarch.rpm"
+      dest: "/tmp/jfrog-artifactory.rpm"
+  - name: Install JFrog Artifactory
+    yum:
+      name: "/tmp/jfrog-artifactory.rpm"
+      state: present
   - name: Start JFrog
     service:
       name: artifactory
