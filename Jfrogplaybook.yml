@@ -2,7 +2,7 @@
 - hosts: 172.31.3.28
   become: yes
   vars:
-    jfrog_version: "7.28.4"
+    jfrog_version: 7.28.4
   tasks:
   - name: Insttalling java
     yum:
