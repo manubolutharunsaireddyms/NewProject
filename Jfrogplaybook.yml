@@ -1,0 +1,8 @@
+---
+- hosts: 172.31.3.28
+  become: yes
+  tasks:
+  - name: Insttalling java
+    yum:
+      name: java-1.8.0-openjdk
+      state: present
