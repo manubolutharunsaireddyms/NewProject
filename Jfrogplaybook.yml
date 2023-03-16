@@ -2,7 +2,7 @@
 - hosts: 172.31.3.28
   become: yes
   vars:
-    jfrog_version: 7.28.4
+    artifactory_version: "7.27.10"
   tasks:
   - name: Insttalling java
     yum:
