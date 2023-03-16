@@ -1,8 +1,6 @@
 ---
 - hosts: 172.31.3.28
   become: yes
-  vars:
-    artifactory_version: "7.58.5"
   tasks:
   - name: Insttalling java
     yum:
@@ -17,7 +15,7 @@
       gpgkey: https://bintray.com/user/downloadSubjectPublicKey?username=jfrog
       enabled: yes
       exclude: ''
-    register: jfrog_repo"
+    register: jfrog_repo
   - name: Install JFrog Artifactory
     yum:
       name: frog-artifactory-oss
