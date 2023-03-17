@@ -6,21 +6,21 @@
     yum:
       name: java-1.8.0-openjdk
       state: present
-  - name: Add JFrog repository
-    yum_repository:
-      name: jfrog-artifactory-oss-rpms
-      description: JFrog Artifactory OSS RPMS
-      baseurl: https://jfrog.bintray.com/artifactory-rpms
-      gpgcheck: yes
-      gpgkey: https://bintray.com/user/downloadSubjectPublicKey?username=jfrog
-      enabled: yes
-      exclude: ''
-    register: jfrog_repo
-  - name: Install JFrog Artifactory
+  - name: Install JFrog
     yum:
-      name: frog-artifactory-oss-rpms
+      name: jfrog-artifactory-oss
       state: present
+
+  - name: Configure JFrog
+    template:
+      src: jfrog.config
+      dest: /opt/jfrog/artifactory/etc/artifactory.system.properties
+      owner: artifactory
+      group: artifactory
+      mode: '0644'
+
   - name: Start JFrog
-    service:
+    systemd:
       name: artifactory
       state: started
+      enabled: yes
